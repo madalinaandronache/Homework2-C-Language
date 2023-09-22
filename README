@@ -1,0 +1,124 @@
+# PCLP Tema2
+# Andronache Madalina-Georgiana
+
+Urmatorul fisier contine informatii despre rezolvarea problemelor propuse in 
+propuse in tema 2 de la PCLP.
+
+Cea mai mare provocare intalnita a fost rezolvarea cat mai eficienta a 
+problemelor propuse intr-un timp cat mai scurt. Aceasta tema a fost rezolvata
+pe parcursul a 5 zile. In viitor, imi doresc rezolvarea mai rapida a 
+cerintelor.
+
+Cuprins
+1. Text Highlight
+2. Autocomplete
+3. Calculator pe biţi
+4. Wordle
+
+
+# 1. Text Higlight
+
+Rezolvarea acestei probleme mi-a luat aproximativ 8 ore. 
+
+Problema contine 4 functii: 
+* int verif_spatiu(char *s, int lg_s) - returneaza 1, respectiv 0, daca sirul
+s contine cel putin un spatiu.
+
+* void parcurgere(char *s, int lg_s, char (*a)[50]) - functia parcurge fiecare
+linie memorata in sirul *s astfel: memorez in doua variabile, *cuvant, primul 
+cuvant intalnit de la pozitia k, iar in *cuvant2, prima secventa de 2 cuvinte 
+intalnita de la pozitia k. In cuvant2, se memoreaza secventa de 2 cuvinte, 
+insa reducand numarul de spatii dintre cele doua cuvinte, daca este cazul.
+Pentru fiecare secventa memorata in (*a), verific daca sunt indeplinite 
+urmatoarele cazuri: 
+1) daca a[i] nu contine spatii si continutul memorat in a[i] este acelasi
+cu cel memorat in cuvant, atunci afisez caracterul '_' de atatea ori
+cat lungimea cuvantului. 
+2) daca a[i] contine spatii si continutul memorat in a[i] este acelasi cu 
+cel memorat in cuvant2, atunci afisez caracterul '_' de atatea ori cat
+lungimea intiala dintre cele 2 cuvinte.
+Daca unul dintre aceste 2 cazuri este indeplinit, copiez in auxiliar, 
+sirul ramas de verificat in continuare. Altfel, daca nu a fost gasita 
+nici o potrivire, se afiseaza caracterul ' ' de atatea ori cat lungimea 
+cuvantului. 
+
+* void initializare(char (*a)[50]) - functia initializeaza vectorul *a, in 
+care sunt memorate cuvintele cheie pe care trebuie sa le gasim.
+
+* int main() - in aceasta functie, citesc valoarea variabilei n, reprezentand 
+numarul de linii pe care le are textul, se initializeaza vectorul *a folosind 
+functia initializare si se parcurge fiecare linie a textului conform 
+conditiilor problemei.
+
+# 2. Autocomplete
+
+Rezolvarea acestei probleme mi-a luat aproximativ 8 ore. 
+
+Probleme contine 4 functii:
+* void adaugare_cuvant(dictionar *v, int n, char *cuvant, int lg_cuv) - 
+adauga cuvantul memorat in variabila *cuvant in dictionar pe prima pozitie
+libera.
+
+* void cautare_cuvant(dictionar **v, int *n, char *cuvant, int lg_cuv) - 
+aceasta functie cauta sirul *cuvant in dictionar, in functie de cazurile
+problemei. Daca cuvantul are pe ultima pozitie caracterul '*', atunci cuvantul
+este afisat. Daca acesta nu este deja prezent in dictionar, este adaugat. 
+Altfel, daca cuvantul introdus corespunde cu primele n caractere din un cuvant
+deja existent in dictionar, unde n reprezinta cate caractere are cuvantul 
+introdus, atunci memoram pozitia cuvantului din dictionar si prioritatea 
+acestuia. Daca se gaseste un cuvant cu prioritate mai mare, care corespunde, 
+atunci pozitia si prioritatea sunt actualizate. Daca prioritatile sunt egale 
+se memoreaza cel mai mic cuvant din punct de vedere lexicografic.
+
+* int main() - se citesc datele de intrare (cele n cuvinte existente in 
+dictionar) si datele introduse de utilizator (cele m cuvinte pentru 
+autocompletare). Pentru fiecare dintre cele m cuvinte introduse de utilizator,
+se verifica daca este semn de punctuatie. In caz afirmativ, se afiseaza 
+nealterat, altfel se apeleaza functia cautare_cuvant.
+
+# 3. Calculator pe biti
+
+Rezolvarea acestei probleme mi-a luat aproximativ 5 ore.
+Problema contine 5 functii:
+
+* int interschimb(int a, int b) - functia implementeaza operatia de 
+interschimbare astfel: in poz1, respectiv poz2, se memoreaza numerele
+reprezentate de primii 2 biti ai numarului b, respectiv ultimii 2 biti ai 
+numarului b. Apoi, se actualizeaza valorile lui poz1 si poz2, deoarece 
+numaratoarea incepe de la stanga la dreapta in problema. Ulterior, se 
+memoreaza valoarile bitilor de pe pozitiile poz1 si poz2 in variabilele
+bit1 si bit2. Folosind operatia xor, verific daca cei doi biti au valori 
+diferite (1 si 0 sau 0 si 1). Daca acest caz este indeplinit, atunci valoarea
+numarului a este actualizata, inlocuind bit1 cu bit2 si invers.
+
+* int opxor(int a, int b) - functia implemeteaza operatia de xor astfel:
+memorez in variabila nr operatia sau dintre numerele a si b. Actualizez nr
+facand si intre valoarea actuala a lui nr si operatia de sau aplicata pentru 
+conjugatele numerelor a si b. In final, a devine egal cu nr.
+
+* int rotire(int a, int b) - functia implementeaza operatia de rotire astfel:
+memoram in b, valoarea lui b % 4, deoarece numarul nostru are doar 4 biti 
+(exemplu: o rotire de 5 ori a numarului este echivalenta cu a face o 
+singura rotire). De b ori, pastram bitul aflat pe prima pozitie in numar in
+variabila bit1, shiftam numarul a la stanga cu o pozitie, memoram doar ultimii
+4 biti si adaugam bitul memorat in bit1 pe ultima pozitie.
+
+* int adunare(int a, int b) - functia implementeaza operatia de adunare astfel:
+Cat timp numarul b este diferit de 0, in variabila transp, pastram unitatea 
+care trebuie trebuie adunata in continuare, a devine xor dintre a si b, 
+folosind functia opxor si b devine transp shiftat la stanga o data. In final, 
+pastram doar ultimii 4 biti ai numarului a.
+
+* int main() - se citesc numerele n si m si se creaza doi vectori: *v in care
+memorez numerele folosite in calcule si *op in care pastrez operatiile. 
+De n ori se realizeaza operatiile corespunzatoare intre a si b. La final se 
+afiseaza a.
+
+# 4. Wordle
+
+Rezolvarea acestei probleme mi-a luat aproximativ 3 zile.
+
+Cea mai grea parte de implementat a fost initializarea ecranului si a tablei
+de joc, cat si miscarea pe ecran in functie de cuvantul introdus. De asemenea, 
+am avut nevoie de foarte multe sesiuni de searching, intrucat nu cunosteam 
+sintaxa bibliotecii <ncurses.h>.
